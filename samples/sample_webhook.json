@@ -1,0 +1,7 @@
+{
+  "event": "RFQ",
+  "customer_id": 12345,
+  "amount": "not_a_number",
+  "currency": "USD",
+  "timestamp": "2024-04-01T10:00:00Z"
+} 

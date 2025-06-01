@@ -1,0 +1,100 @@
+Delivered-To: dilpreet082023@gmail.com
+Received: by 2002:a05:7412:9c8b:b0:157:5114:cb3c with SMTP id lt11csp562840rdb;
+        Sun, 1 Jun 2025 00:54:20 -0700 (PDT)
+X-Received: by 2002:a05:6902:1105:b0:e7f:6cd9:1687 with SMTP id 3f1490d57ef6-e8128dc84b6mr4531870276.29.1748764460103;
+        Sun, 01 Jun 2025 00:54:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1748764460; cv=none;
+        d=google.com; s=arc-20240605;
+        b=fGaJJ8mgOt1bEKP6/oDO571Pj4RnRkhtErK/4RjMrHk4FKsMyiOgQKhBxnevC7agxD
+         BxEG8+qqeZ60JG2eHI2I916q3Svgv/gYVRP/MnMSPMGxYZVJDa9FGOhHi553r9oJnjzY
+         hAuC/KC+355GQ4CJMDotAl4WS1+JY/sKPebJzq9fP817NN8NVQMu9A1XkPYU5xENgI//
+         ZSeeHPaFZNXvwO0Gwv+pDto5JLxSIipjpqqTtXXAPYwMX1FX1BLktFJaFQvnOCNE9N6K
+         lGYgSimZ5nnelG2wrkwKqguRJ+F/gSocTSyDXGBSFIHMmEb0oXVjLIJtbQwFU3B6GD5K
+         HhNA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=Gr60zvyPqUP4yO25SAmYPzaBgNEOvecJP0Ok7wh6WMI=;
+        fh=ReiLBqqLVA3p85rw+9GK4bdLAdBjZo1BWTfvnNn/fh4=;
+        b=gWiJG3Vh1crSqaGK7J7LUxcANc8tCu5/TM/Zknpp8eljD2cz5eM9WMTIEmSg66sj1S
+         GNCeoaLC/qj4ap3LWW8y0u1pSrJy+5dX51mZ3zRAojErHvqGRXwjcHwqUiU+vphUIDmS
+         1WlgrS1WFD7cEcIm2FDYAmY0Z+saHlJjkZ2y5l+Ck5xrGxjZ1fI42o6NQbMQxOmO0FHU
+         r6lAKNZJXUTTrT8UuyJlG43mq41/YH3sMTOVCw9zMvWVweNDIDTCwa6IlRccXAJJwQZD
+         zrobpwsJ4CDTaNrS8gyihzFNMrVzZ9Nn5hSSXyUMFLV7RrBsBZwE6ZXXMu8TlxT/V9dR
+         OoMw==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@nitdelhi.ac.in header.s=google header.b=MaiEvEcP;
+       spf=pass (google.com: domain of 231210041@nitdelhi.ac.in designates 209.85.220.41 as permitted sender) smtp.mailfrom=231210041@nitdelhi.ac.in;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=nitdelhi.ac.in;
+       dara=pass header.i=@gmail.com
+Return-Path: <231210041@nitdelhi.ac.in>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 3f1490d57ef6-e7f731b8272sor3992909276.0.2025.06.01.00.54.19
+        for <dilpreet082023@gmail.com>
+        (Google Transport Security);
+        Sun, 01 Jun 2025 00:54:20 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 231210041@nitdelhi.ac.in designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@nitdelhi.ac.in header.s=google header.b=MaiEvEcP;
+       spf=pass (google.com: domain of 231210041@nitdelhi.ac.in designates 209.85.220.41 as permitted sender) smtp.mailfrom=231210041@nitdelhi.ac.in;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=nitdelhi.ac.in;
+       dara=pass header.i=@gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=nitdelhi.ac.in; s=google; t=1748764459; x=1749369259; dara=google.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=Gr60zvyPqUP4yO25SAmYPzaBgNEOvecJP0Ok7wh6WMI=;
+        b=MaiEvEcP80gGys2SYQcdXvDKsTOPMgx+wNpDKVolyIwPtqoSVakM3itMX1WQD2kBc1
+         DJtztYUK6w0W9VLDelyYkz//+bMv3w1PF2TdTh/Tx6swEeVowdf8mOKaYxV5LoHOk+nX
+         sD46qs56CJogGqKTPcO139pIitHZf3mW44OYeDwdnIzt7x7zUa/8mQYoAjyP1Jrn0PVQ
+         UeJiBOcwxQuARUwvq5eZOya2TpLYojzfzK/1AfLcjYTGtq1YZCMxeNpsZE36nLVefIyZ
+         NVyOo/yjY9kGfMBbi+r+RPaNEI0Puz0UbdqrVtLvzknxW+wchYxIZpa3O0wbdAe0IujQ
+         /Meg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748764459; x=1749369259;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Gr60zvyPqUP4yO25SAmYPzaBgNEOvecJP0Ok7wh6WMI=;
+        b=jXkx8qx02m8YvkloyejPOWgZQ8m9FEpkWYnSVueIBd5K1CgiMj0Of5a5uMEuAPba2e
+         ZmTSVnnc1Fy15seD41PWwpJRNqHcpJeUXIUM4WuUzAP3qsfhNm4UFFFJB5ozOXrr0JQa
+         G99W3ktrjOdoXhZsrrqC0zliDH8NhlyMTdpjpFkVDr4gpqT7JjmG9U51j9/0V09VxSqJ
+         /hfgfxE1CVRMozvXEQW2d3Qo6Tkp4mXiq/3kDwV81bgxNWPntJfCVp05qJNESp5+rzKV
+         wHg/ccR+XjnpYjGCIkCd+rZAlu04ipFppT8WFdLjgAZO+frwATnwXFflSu847Lk313VI
+         f8Bw==
+X-Gm-Message-State: AOJu0YzkUWY9UbbWBXT9OAEIg8riTGsVLvpKbkTIGUu+LECZwVpdxhrX
+	sG52PLaX5fu9bIsFMj6nkMZNAxI8fJXGsRGEbG+YDLEDTChBxQ9YKT0xe3a1jo9QhvWRegws0EE
+	tOxStv+np8/M6lfhAufrJi4oMRRxGyzW0g4PxYAU9umoysfDnmK3O30c=
+X-Gm-Gg: ASbGnct9T318GE/C0CzxUtX1t0E6xmGkF8JqCKuJeu22PO1fMhPavbWGXi9uc6hQFpV
+	q1MzJReeAKb5aEzqmqCP7zUKQfc8x8D8hiMY3VHlAI7qqSgHMb33KTNPaf8L1zr9LynlxHWdgLW
+	oRz26o2lmN7LaJBgcIWYZU1kWZk1QsepmNNSWdq5yphr+SiExHDWJoq5I=
+X-Google-Smtp-Source: AGHT+IHJGEoMowsa8SHVE4UXriJtxY5zWC5gn2oodgqO22pkVLHDs15Qm2FPYKYHYvkVL/EnuMk+TcyxNKxl+xZcgFY=
+X-Received: by 2002:a05:6902:1147:b0:e7d:6227:5052 with SMTP id
+ 3f1490d57ef6-e8128dc8543mr4752771276.25.1748764459476; Sun, 01 Jun 2025
+ 00:54:19 -0700 (PDT)
+MIME-Version: 1.0
+From: DILPREET SINGH <231210041@nitdelhi.ac.in>
+Date: Sun, 1 Jun 2025 13:24:08 +0530
+X-Gm-Features: AX0GCFuhYpomyVATeuVY22Vrv6hWcE8o4oGYP75LacgMYq5-2lB8knNpWL5u8LE
+Message-ID: <CALrZKv6d=zb6-_V1XjmxD01UcOxSXQWUd8CYzi9JZ20j6iMMZQ@mail.gmail.com>
+Subject: Urgent Complaint
+To: "D. Singh" <dilpreet082023@gmail.com>
+Content-Type: multipart/alternative; boundary="00000000000067389006367df427"
+
+--00000000000067389006367df427
+Content-Type: text/plain; charset="UTF-8"
+
+Dear Support,
+
+I am extremely dissatisfied with the recent service. My issue has not been
+resolved despite multiple requests. This is unacceptable and I demand
+immediate attention.
+
+Regards,
+Dilpreet Singh
+
+--00000000000067389006367df427
+Content-Type: text/html; charset="UTF-8"
+
+<div dir="ltr">Dear Support,<br><br>I am extremely dissatisfied with the recent service. My issue has not been resolved despite multiple requests. This is unacceptable and I demand immediate attention.<br><br>Regards,<br>Dilpreet Singh</div>
+
+--00000000000067389006367df427--
