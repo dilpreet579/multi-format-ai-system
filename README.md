@@ -44,6 +44,7 @@ A multi-agent system that processes Email, JSON, and PDF inputs, classifies form
 ```
 api/         # FastAPI app and endpoints
 agents/      # Specialized agents (Email, JSON, PDF, Classifier)
+images/      # Architecture Diagram & Screenshots(UI, Outputs) 
 router/      # Action router for chaining actions
 memory/      # Memory store (SQLite-backed)
 static/      # Frontend assets (js, css)
@@ -100,13 +101,10 @@ uvicorn api.main:app --reload
 ## Dependencies
 - fastapi
 - uvicorn
-- langchain
 - openai
 - PyPDF2
 - faker
 - requests
-- scikit-learn
-- textblob
 - python-dotenv
 - python-multipart
 - Jinja2
