@@ -30,10 +30,33 @@ class MemoryStore:
                    json.dumps(metadata), json.dumps(extracted_fields), json.dumps(actions), json.dumps(trace)))
         self.conn.commit()
 
-    def get_logs(self, limit=100):
+    def get_logs(self, limit=100, intent=None, source=None):
         c = self.conn.cursor()
+        
+        '''
+        Removed these lines. The new query provides options for filtering the logs.
+        
         c.execute('SELECT * FROM logs ORDER BY id DESC LIMIT ?', (limit,))
         return c.fetchall()
+        '''
+        
+        
+        query = 'SELECT * FROM logs'
+        params = []
+        filters = []
+        if intent:
+            filters.append('intent = ?')
+            params.append(intent)
+        if source:
+            filters.append('source = ?')
+            params.append(source)
+        if filters:
+            query += ' WHERE ' + ' AND '.join(filters)
+        query += ' ORDER BY id DESC LIMIT ?'
+        params.append(limit)
+        c.execute(query, params)
+        columns = [desc[0] for desc in c.description]
+        return [dict(zip(columns, row)) for row in c.fetchall()]
 
     def close(self):
         self.conn.close() 
