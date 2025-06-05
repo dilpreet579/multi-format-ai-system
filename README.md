@@ -129,4 +129,4 @@ pip install -r requirements.txt
 ![Result Display](images/result_display.png)
 
 ### 3. Logs Panel
-![Logs Panel](images /logs_panel.png)
+![Logs Panel](images/logs_panel.png)
