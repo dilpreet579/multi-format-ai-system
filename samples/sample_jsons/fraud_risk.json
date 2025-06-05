@@ -1,0 +1,12 @@
+{
+    "alertId": "ALRT-86161",
+    "type": "FraudRisk",
+    "detectedAt": "2004-07-07T20:39:28",
+    "details": {
+        "transactionId": "TXN-723388",
+        "amount": 19913.71,
+        "currency": "USD",
+        "reason": "Suspicious transaction pattern detected"
+    },
+    "severity": "Medium"
+}

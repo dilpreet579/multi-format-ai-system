@@ -1,0 +1,19 @@
+{
+    "requestId": "req-51744",
+    "type": "RFQ",
+    "customer": {
+        "name": "Allen-Hunter",
+        "contact": "troyzavala@bean-hanson.com"
+    },
+    "items": [
+        {
+            "productId": "P414",
+            "quantity": 295
+        },
+        {
+            "productId": "P927",
+            "quantity": 145
+        }
+    ],
+    "requestedDate": "1970-07-17T09:40:00"
+}

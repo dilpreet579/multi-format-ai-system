@@ -1,0 +1,14 @@
+{
+    "updateId": "UPD-88525",
+    "type": "Regulation",
+    "description": "New compliance requirements update",
+    "effectiveDate": "2025-03-15",
+    "details": {
+        "sections": [
+            "Data subject rights",
+            "Data subject rights",
+            "Data protection impact assessments",
+            "Encryption requirements"
+        ]
+    }
+}
