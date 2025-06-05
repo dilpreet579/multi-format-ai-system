@@ -1,12 +1,9 @@
 fastapi
 uvicorn
-langchain
 openai
 PyPDF2
 faker
 requests
-scikit-learn
-textblob
 python-dotenv
 python-multipart
 Jinja2
