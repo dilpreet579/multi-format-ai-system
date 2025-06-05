@@ -1,0 +1,39 @@
+body {
+  background: #f8f9fa;
+}
+.card {
+  border-radius: 12px;
+}
+.result, .logs {
+  background: #f6f8fa;
+  border-radius: 8px;
+  padding: 1.2em;
+  box-shadow: 0 1px 4px #0001;
+  margin-top: 1.5em;
+}
+pre {
+  background: #e9ecef;
+  border-radius: 6px;
+  padding: 1em;
+  font-size: 0.97em;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+#result h3, #logs h3 {
+  margin-top: 0;
+}
+.json-key { color: #005cc5; font-weight: bold; }
+.json-string { color: #22863a; }
+.json-number { color: #b31d28; }
+.json-boolean { color: #795548; font-weight: bold; }
+.json-null { color: #6a737d; font-style: italic; }
+textarea {
+  min-height: 120px;
+}
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  outline: none;
+}
+.accordion-body {
+  background: #f6f8fa;
+} 
