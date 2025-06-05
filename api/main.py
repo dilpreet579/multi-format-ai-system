@@ -46,13 +46,9 @@ async def upload(request: Request, file: UploadFile = File(None), json_data: str
         agent_result = json_agent.process(content)
         action = agent_result['action']
     elif fmt == 'PDF':
-        # Save uploaded PDF to temp file
-        temp_path = f'temp_{filename}'
-        with open(temp_path, 'wb') as f:
-            f.write(content if isinstance(content, bytes) else content.encode('utf-8'))
-        agent_result = pdf_agent.process(temp_path)
+        pdf_bytes = content if isinstance(content, bytes) else content.encode('utf-8')
+        agent_result = pdf_agent.process(pdf_bytes)
         action = agent_result['action']
-        os.remove(temp_path)
     router_result = action_router.trigger_action(action)
     trace = {
         'classification': classification,
