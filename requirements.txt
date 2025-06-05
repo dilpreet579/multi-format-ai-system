@@ -9,4 +9,5 @@ scikit-learn
 textblob
 python-dotenv
 python-multipart
-Jinja2 
+Jinja2
+pydantic
