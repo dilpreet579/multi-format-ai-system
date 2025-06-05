@@ -2,6 +2,7 @@ document.getElementById('uploadForm').onsubmit = async function(e) {
   e.preventDefault();
   const submitBtn = document.getElementById('submitBtn');
   submitBtn.disabled = true;
+  console.log('uploadForm');
   const formData = new FormData();
   const file = document.getElementById('fileInput').files[0];
   const json = document.getElementById('jsonInput').value;
@@ -12,7 +13,8 @@ document.getElementById('uploadForm').onsubmit = async function(e) {
   try {
     const res = await fetch('/upload', { method: 'POST', body: formData });
     const data = await res.json();
-    setResult(renderResultSummary(data) + '<pre>' + syntaxHighlight(data) + '</pre>');
+    console.log(data);
+    setResult('<pre>' + ResultSummary(data) + '</pre>' + '<pre>' + syntaxHighlight(data) + '</pre>');
     document.getElementById('uploadForm').reset();
   } catch (err) {
     setResult('<div class="alert alert-danger" role="alert" aria-live="assertive">Error: ' + err + '</div>');
@@ -70,16 +72,16 @@ function syntaxHighlight(json) {
 }
 
 // Render a summary card for the result
-function renderResultSummary(data) {
-  if (!data || !data.classification || !data.action) return '';
-  const { classification, action } = data;
+function ResultSummary(data) {
+  //if (!data || !data.classification || !data.agent_result) return 'Data is empty';
+  const { classification, agent_result } = data;
   const fmt = classification.format || '-';
   const intent = classification.intent || '-';
-  const actionBox = action.type || '-';
+  const actionBox = agent_result.action.type || '-';
   return `
-    <div class="card mb-3 border-primary" style="max-width: 100%;">
-      <div class="card-body p-3">
-        <div class="row g-2 align-items-center">
+    <div class="card mb-2 border-primary" style="max-width:100%; font-size:0.97em;">
+      <div class="card-body p-2">
+        <div class="row g-1 align-items-center">
           <div class="col-md-4 col-6"><span class="fw-bold">Format:</span> <span class="badge bg-primary">${fmt}</span></div>
           <div class="col-md-4 col-6"><span class="fw-bold">Intent:</span> <span class="badge bg-success">${intent}</span></div>
           <div class="col-md-4 col-6"><span class="fw-bold">Action:</span> <span class="badge bg-warning text-dark">${actionBox}</span></div>
