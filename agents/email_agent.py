@@ -1,33 +1,50 @@
-import re
-from textblob import TextBlob
+import os
+
+from openai import OpenAI
+from pydantic import BaseModel
+
 from typing import Dict, Any
+from dotenv import load_dotenv
+load_dotenv()
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+class Email(BaseModel):
+    sender: str
+    subject: str
+    body: str
+    urgency: str
+    issue: str
+    tone: str
 
 class EmailAgent:
     def __init__(self):
         pass
 
     def extract_fields(self, email_content: str) -> Dict[str, Any]:
-        sender = re.search(r'From: (.*)', email_content)
-        sender = sender.group(1).strip() if sender else None
-        subject = re.search(r'Subject: (.*)', email_content)
-        subject = subject.group(1).strip() if subject else None
-        body = email_content.split('\n\n', 1)[-1]
-        urgency = 'high' if re.search(r'urgent|immediate|asap|unacceptable', body, re.I) else 'routine'
-        issue = subject if subject else body[:100]
-        return {'sender': sender, 'subject': subject, 'urgency': urgency, 'issue': issue, 'body': body}
+        prompt = (
+            "You are an email parsing assistant. Extract the following fields from the email content: sender, subject, body, urgency (high or routine), issue (short summary of the main issue), and the tone of the email(polite, angry, threatening, escalation, or neutral). "
+            "The email content is: " + email_content
+        )
+        try:
+            completion1 = client.beta.chat.completions.parse(
+                model="gpt-4o",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an email parsing assistant.",
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+                response_format=Email,
+            )
+            event = completion1.choices[0].message.parsed
 
-    def detect_tone(self, body: str) -> str:
-        blob = TextBlob(body)
-        polarity = blob.sentiment.polarity
-        if polarity < -0.3:
-            return 'angry'
-        elif polarity > 0.3:
-            return 'polite'
-        elif re.search(r'threat|legal|lawsuit', body, re.I):
-            return 'threatening'
-        elif re.search(r'escalate|unacceptable', body, re.I):
-            return 'escalation'
-        return 'neutral'
+            return event.model_dump()
+        except Exception as e:
+            print(f"[EMAIL_AGENT DEBUG] OpenAI API error: {e}")
+            return {"sender": None, "subject": None, "body": email_content, "urgency": "routine", "issue": email_content[:100], "tone": "neutral"}
+        
 
     def trigger_action(self, tone: str, urgency: str, fields: Dict[str, Any]) -> Dict[str, Any]:
         if tone in ['angry', 'escalation', 'threatening'] or urgency == 'high':
@@ -38,6 +55,6 @@ class EmailAgent:
 
     def process(self, email_content: str) -> Dict[str, Any]:
         fields = self.extract_fields(email_content)
-        tone = self.detect_tone(fields['body'])
+        tone = fields['tone']
         action = self.trigger_action(tone, fields['urgency'], fields)
         return {'fields': fields, 'tone': tone, 'action': action} 
