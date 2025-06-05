@@ -14,7 +14,7 @@ document.getElementById('uploadForm').onsubmit = async function(e) {
     const res = await fetch('/upload', { method: 'POST', body: formData });
     const data = await res.json();
     console.log(data);
-    setResult('<pre>' + ResultSummary(data) + '</pre>' + '<pre>' + syntaxHighlight(data) + '</pre>');
+    setResult(ResultSummary(data)+ '<pre>' + syntaxHighlight(data) + '</pre>');
     document.getElementById('uploadForm').reset();
   } catch (err) {
     setResult('<div class="alert alert-danger" role="alert" aria-live="assertive">Error: ' + err + '</div>');
