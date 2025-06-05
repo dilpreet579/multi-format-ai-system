@@ -1,7 +1,9 @@
 import os
 import json
 from fastapi import FastAPI, File, UploadFile, Form, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from agents.classifier_agent import ClassifierAgent
 from agents.email_agent import EmailAgent
 from agents.json_agent import JSONAgent
@@ -9,13 +11,36 @@ from agents.pdf_agent import PDFAgent
 from memory.memory_store import MemoryStore
 from router.action_router import ActionRouter
 
-app = FastAPI()
+app = FastAPI(
+    title="Multi-Format Autonomous AI System",
+    description="A system that processes inputs from Email, JSON, and PDF, classifies format and business intent, routes to specialized agents, and dynamically chains follow-up actions.",
+    version="1.0.0"
+)
+
+templates = Jinja2Templates(directory="templates")
+
+# Mount static files if directory exists
+if os.path.isdir("static"):
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+else:
+    print("Static directory not found. UI features will be limited.")
+
 classifier = ClassifierAgent()
 email_agent = EmailAgent()
 json_agent = JSONAgent()
 pdf_agent = PDFAgent()
 memory = MemoryStore()
 action_router = ActionRouter()
+
+def error_response(message: str, status_code: int = 400):
+    return JSONResponse({"error": message}, status_code=status_code)
+
+@app.get("/", response_class=HTMLResponse)
+async def root(request: Request):
+    try:
+        return templates.TemplateResponse("index.html", {"request": request})
+    except Exception as e:
+        return error_response(f"Failed to serve UI: {str(e)}", status_code=500)
 
 @app.post('/upload')
 async def upload(request: Request, file: UploadFile = File(None), json_data: str = Form(None)):
@@ -32,7 +57,7 @@ async def upload(request: Request, file: UploadFile = File(None), json_data: str
         elif json_data:
             content = json.loads(json_data)
         else:
-            return JSONResponse({'error': 'No input provided'}, status_code=400)
+            return error_response('No input provided', status_code=400)
         classification = classifier.classify(content, filename)
         fmt = classification['format']
         intent = classification['intent']
@@ -51,7 +76,7 @@ async def upload(request: Request, file: UploadFile = File(None), json_data: str
             agent_result = pdf_agent.process(pdf_bytes)
             action = agent_result['action']
         else:
-            return JSONResponse({'error': 'Unsupported file format'}, status_code=400)
+            return error_response('Unsupported file format', status_code=400)
         router_result = action_router.trigger_action(action)
         trace = {
             'classification': classification,
@@ -61,7 +86,7 @@ async def upload(request: Request, file: UploadFile = File(None), json_data: str
         memory.log_entry(source, fmt, intent, classification, agent_result.get('fields', {}), action, trace)
         return trace
     except Exception as e:
-        return JSONResponse({'error': str(e)}, status_code=500)
+        return error_response(str(e), status_code=500)
 
 @app.post('/crm/escalate')
 async def crm_escalate(payload: dict):
