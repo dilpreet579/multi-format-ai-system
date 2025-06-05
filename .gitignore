@@ -56,6 +56,12 @@ coverage.xml
 # VS Code
 .vscode/
 
+# VS Code Workspace
+Multi Agent System.code-workspace
+
+# System Architecture
+system_architecture/
+
 # Environment
 .env
 .env.*
