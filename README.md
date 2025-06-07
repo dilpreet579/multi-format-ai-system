@@ -56,12 +56,12 @@ README.md
 
 ## Setup
 1. **Clone the Repository**
-   ```bash
+```bash
 git clone https://github.com/dilpreet579/multi-format-ai-system.git
 cd multi-format-ai-system
 ```
 2. **Create and Activate a Virtual Environment**
-   ```bash
+```bash
 python -m venv venv
 # On Windows:
 .\venv\Scripts\activate
@@ -69,15 +69,15 @@ python -m venv venv
 source venv/bin/activate
 ```
 3. **Install Dependencies**
-   ```bash
+```bash
 pip install -r requirements.txt
 ```
 4. **Run the API Server**
-   ```bash
+```bash
 uvicorn api.main:app --reload
 ```
 5. **Access the UI**
-   Open [http://localhost:8000/](http://localhost:8000/) in your browser.
+Open [http://localhost:8000/](http://localhost:8000/) in your browser.
 
 ## API Endpoints
 - `GET /` — Web UI
