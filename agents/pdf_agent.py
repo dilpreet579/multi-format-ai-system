@@ -84,6 +84,8 @@ class PDFAgent:
         action = None
         if flags:
             action = {'type': 'flag_risk', 'flags': flags}
+        else:
+            action = {'type': 'log_and_close', 'fields': extraction}
         return {
             'fields': extraction,
             'flags': flags,
