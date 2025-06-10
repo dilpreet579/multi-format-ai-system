@@ -26,4 +26,6 @@ class JSONAgent:
         action = None
         if anomalies:
             action = {'type': 'log_alert', 'anomalies': anomalies, 'fields': data}
+        else:
+            action = {'type': 'log_and_close', 'fields': data}
         return {'fields': data, 'anomalies': anomalies, 'action': action} 
